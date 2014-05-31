@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 
-#define USE_KAL
+//#define USE_KAL
 
 ofImage opal;
 ofPlanePrimitive plane;
@@ -72,6 +72,8 @@ void testApp::draw(){
    shader.setUniform2f("mouse", mousePositionX,mousePositionY);
    ofPushMatrix();
    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
    plane.draw();
    ofPopMatrix();
    
