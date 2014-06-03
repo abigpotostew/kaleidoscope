@@ -12,10 +12,8 @@ uniform sampler2DRect tex0;
 varying vec2 texCoordVarying;
 
 void main(void){
-  vec2 pos = vec2(
-  gl_FragCoord
-  //texCoordVarying
-  .xy*resolution - 0.5 * resolution) / resolution.y;
+   vec2 pos = // vec2(
+   gl_FragCoord.xy;// - resolution*0.5;//*resolution - 0.5 * resolution) / resolution.y;
 
   float rad = length(pos);
   float angle = atan(pos.y, pos.x);

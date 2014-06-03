@@ -6,13 +6,14 @@ const float sections = 10.0;
 
 uniform vec2 resolution;
 uniform float time;
-
 uniform sampler2DRect tex0;
+
 in vec2 varyingtexcoord;
+
 out vec4 outputColor;
 
 void main(void){
-  vec2 pos = vec2(varyingtexcoord - 0.5 * resolution) / resolution.y;
+   vec2 pos = (gl_FragCoord.xy - resolution*0.5);//vec2(varyingtexcoord - 0.5 * resolution) / resolution.y;
 
   float rad = length(pos);
   float angle = atan(pos.y, pos.x);
@@ -23,13 +24,7 @@ void main(void){
   float x = cos(ma) * rad;
   float y = sin(ma) * rad;
 	
-  float t = time/10.0;
+  float t = time*5.0;
   
-  outputColor = texture(tex0, vec2(x-t, y-t));
-}
-
-float Tile1D(float p, float a){
-  p -= 4.0 * a * floor(p/4.0 * a);
-  p -= 2.* max(p - 2.0 * a , 0.0);
-  return p;
+   outputColor = texture(tex0, vec2(x-t, y-t));
 }

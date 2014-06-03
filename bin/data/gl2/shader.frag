@@ -7,7 +7,7 @@ varying vec2 texCoordVarying;
 
 void main()
 {
-   gl_FragColor = texture2DRect(tex0, gl_FragCoord.xy);//texCoordVarying);
+   gl_FragColor = texture2DRect(tex0, vec2(gl_FragCoord.x, -gl_FragCoord.y));//texCoordVarying);
    
    /*float windowWidth = 1024.0;
    float windowHeight = 768.0;
