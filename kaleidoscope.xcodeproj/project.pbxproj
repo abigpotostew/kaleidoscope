@@ -62,8 +62,8 @@
 /* Begin PBXFileReference section */
 		6B735879193E40B6009E6DFA /* eyes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = eyes.jpg; sourceTree = "<group>"; };
 		6BB76E2C193953070028CFB0 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		6BB76E2E193953070028CFB0 /* kaleidoscope.frag.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = kaleidoscope.frag.glsl; sourceTree = "<group>"; };
-		6BB76E2F193953070028CFB0 /* pass.vert.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = pass.vert.glsl; sourceTree = "<group>"; };
+		6BB76E2E193953070028CFB0 /* kaleidoscope.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = kaleidoscope.frag; sourceTree = "<group>"; };
+		6BB76E2F193953070028CFB0 /* kaleidoscope.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = kaleidoscope.vert; sourceTree = "<group>"; };
 		6BB76E30193953070028CFB0 /* shader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shader.frag; sourceTree = "<group>"; };
 		6BB76E31193953070028CFB0 /* shader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shader.vert; sourceTree = "<group>"; };
 		6BB76E33193953070028CFB0 /* kaleidoscope.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = kaleidoscope.frag; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 		6BB76E2D193953070028CFB0 /* es2 */ = {
 			isa = PBXGroup;
 			children = (
-				6BB76E2E193953070028CFB0 /* kaleidoscope.frag.glsl */,
-				6BB76E2F193953070028CFB0 /* pass.vert.glsl */,
+				6BB76E2E193953070028CFB0 /* kaleidoscope.frag */,
+				6BB76E2F193953070028CFB0 /* kaleidoscope.vert */,
 				6BB76E30193953070028CFB0 /* shader.frag */,
 				6BB76E31193953070028CFB0 /* shader.vert */,
 			);
