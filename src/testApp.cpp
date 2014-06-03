@@ -1,13 +1,8 @@
 #include "testApp.h"
 
-
-#define USE_KAL
-
 ofImage opal;
 ofPlanePrimitive plane;
-//#ifdef USE_KAL
 ofShader shader_keliedo;
-//#endif
 ofShader shader;
 
 bool use_kal = false;
@@ -47,10 +42,10 @@ void testApp::draw(){
    ofClear(255.0f, 255.f, 255.f);
    ofSetColor(255);
    //The next 4 lines don't seem to work.
-   opal.getTextureReference().setTextureWrap(GL_REPEAT,GL_REPEAT);
-   ofSetTextureWrap(GL_REPEAT,GL_REPEAT);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+   opal.getTextureReference().setTextureWrap(GL_REPEAT,GL_REPEAT); //doesn't work
+   ofSetTextureWrap(GL_REPEAT,GL_REPEAT); //doesn't work
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //doesn't work
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); //doesn't work
    
    opal.getTextureReference().bind();
    
@@ -80,6 +75,12 @@ void testApp::draw(){
    opal.getTextureReference().unbind();
 }
 
+
+//--------------------------------------------------------------
+void testApp::mouseReleased(int x, int y, int button){
+   use_kal = !use_kal;
+}
+/*
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
    
@@ -106,11 +107,6 @@ void testApp::mousePressed(int x, int y, int button){
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
-   use_kal = !use_kal;
-}
-
-//--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
    
 }
@@ -123,4 +119,4 @@ void testApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
    
-}
+}*/
