@@ -5,19 +5,18 @@ ofPlanePrimitive plane;
 ofShader shader_keliedo;
 ofShader shader;
 
-bool use_kal = false;
+bool use_kal = true;
 
 //--------------------------------------------------------------
 void testApp::setup(){
    
    std::cout<<glGetString(GL_VERSION)<<std::endl;
    
-   //ofEnableNormalizedTexCoords();
    ofDisableArbTex();
    
    img.loadImage("eyes.jpg");
    
-   float planeScale = 0.75;
+   float planeScale = 1.;
    int planeWidth = ofGetWidth() * planeScale;
    int planeHeight = ofGetHeight() * planeScale;
    int planeGridSize = 20;
@@ -27,14 +26,15 @@ void testApp::setup(){
    plane.set(planeWidth, planeHeight, planeColumns, planeRows, OF_PRIMITIVE_TRIANGLES);
    plane.mapTexCoordsFromTexture(img.getTextureReference());
    
-   if(ofIsGLProgrammableRenderer()){
-      shader_keliedo.load("gl3/kaleidoscope");
-      shader.load("gl3/shader"); //passthrough shader
-   }else{
+   // my opengl3 shaders don't work
+//   if(ofIsGLProgrammableRenderer()){
+//      shader_keliedo.load("gl3/kaleidoscope");
+//      shader.load("gl3/shader"); //passthrough shader
+//   }else{
       shader_keliedo.load("gl2/kaleidoscope");
       shader.load("gl2/shader"); //passthrough shader
-   }
-   
+      //}
+   use_kal = true;
 }
 
 //--------------------------------------------------------------
@@ -45,12 +45,10 @@ void testApp::update(){
 void testApp::draw(){
    ofClear(255.0f, 255.f, 255.f);
    ofSetColor(255);
-   //The next 4 lines don't seem to work.
+   
    GLint repeat = GL_MIRRORED_REPEAT;
-   img.getTextureReference().setTextureWrap(repeat,repeat); //doesn't work
-                                                            //ofSetTextureWrap(repeat,repeat); //doesn't work
-   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, repeat); //doesn't work
-   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat); //doesn't work
+   img.getTextureReference().setTextureWrap(repeat,repeat);
+
    
    img.getTextureReference().bind();
    
@@ -65,7 +63,7 @@ void testApp::draw(){
       shader_keliedo.setUniform2f("mouse", mousePositionX, mousePositionY);
       shader_keliedo.setUniform1f("time", ofGetElapsedTimef());
       shader_keliedo.setUniform2f("resolution", ofGetWidth(),ofGetHeight());
-      shader_keliedo.setUniform2f("uvOffset", mousePositionX, mousePositionY);
+      shader_keliedo.setUniform2f("uvOffset", mouseNormX, mouseNormY);
       ofPushMatrix();
       ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
       plane.draw();
@@ -89,43 +87,3 @@ void testApp::draw(){
 void testApp::mouseReleased(int x, int y, int button){
    use_kal = !use_kal;
 }
-/*
-//--------------------------------------------------------------
-void testApp::keyPressed(int key){
-   
-}
-
-//--------------------------------------------------------------
-void testApp::keyReleased(int key){
-   
-}
-
-//--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
-   
-}
-
-//--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
-   
-}
-
-//--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
-   
-}
-
-//--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
-   
-}
-
-//--------------------------------------------------------------
-void testApp::gotMessage(ofMessage msg){
-   
-}
-
-//--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
-   
-}*/
