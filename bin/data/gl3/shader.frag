@@ -2,7 +2,7 @@
 #version 150
 
 // this is how we receive the texture
-uniform sampler2DRect tex0;
+uniform sampler2D tex0;
 
 in vec2 varyingtexcoord;
 

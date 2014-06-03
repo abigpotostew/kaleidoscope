@@ -60,6 +60,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B735879193E40B6009E6DFA /* eyes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = eyes.jpg; sourceTree = "<group>"; };
 		6BB76E2C193953070028CFB0 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		6BB76E2E193953070028CFB0 /* kaleidoscope.frag.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = kaleidoscope.frag.glsl; sourceTree = "<group>"; };
 		6BB76E2F193953070028CFB0 /* pass.vert.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = pass.vert.glsl; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 		6BB76E2B193953070028CFB0 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				6B735879193E40B6009E6DFA /* eyes.jpg */,
 				6BB76E2C193953070028CFB0 /* .gitkeep */,
 				6BB76E2D193953070028CFB0 /* es2 */,
 				6BB76E32193953070028CFB0 /* gl2 */,

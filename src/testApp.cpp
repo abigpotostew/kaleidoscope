@@ -1,6 +1,6 @@
 #include "testApp.h"
 
-ofImage opal;
+ofImage img;
 ofPlanePrimitive plane;
 ofShader shader_keliedo;
 ofShader shader;
@@ -12,7 +12,10 @@ void testApp::setup(){
    
    std::cout<<glGetString(GL_VERSION)<<std::endl;
    
-   opal.loadImage("opal.jpg");
+   //ofEnableNormalizedTexCoords();
+   ofDisableArbTex();
+   
+   img.loadImage("eyes.jpg");
    
    float planeScale = 0.75;
    int planeWidth = ofGetWidth() * planeScale;
@@ -22,7 +25,7 @@ void testApp::setup(){
    int planeRows = planeHeight / planeGridSize;
    
    plane.set(planeWidth, planeHeight, planeColumns, planeRows, OF_PRIMITIVE_TRIANGLES);
-   plane.mapTexCoordsFromTexture(opal.getTextureReference());
+   plane.mapTexCoordsFromTexture(img.getTextureReference());
    
    if(ofIsGLProgrammableRenderer()){
       shader_keliedo.load("gl3/kaleidoscope");
@@ -31,6 +34,7 @@ void testApp::setup(){
       shader_keliedo.load("gl2/kaleidoscope");
       shader.load("gl2/shader"); //passthrough shader
    }
+   
 }
 
 //--------------------------------------------------------------
@@ -42,21 +46,26 @@ void testApp::draw(){
    ofClear(255.0f, 255.f, 255.f);
    ofSetColor(255);
    //The next 4 lines don't seem to work.
-   opal.getTextureReference().setTextureWrap(GL_REPEAT,GL_REPEAT); //doesn't work
-   ofSetTextureWrap(GL_REPEAT,GL_REPEAT); //doesn't work
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //doesn't work
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); //doesn't work
+   GLint repeat = GL_MIRRORED_REPEAT;
+   img.getTextureReference().setTextureWrap(repeat,repeat); //doesn't work
+                                                            //ofSetTextureWrap(repeat,repeat); //doesn't work
+   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, repeat); //doesn't work
+   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat); //doesn't work
    
-   opal.getTextureReference().bind();
+   img.getTextureReference().bind();
    
    float mousePositionX = ofMap(mouseX, 0, ofGetWidth(), plane.getWidth(), -plane.getWidth(), true);
    float mousePositionY = ofMap(mouseY, 0, ofGetHeight(), plane.getHeight(), -plane.getHeight(), true);
+   
+   float mouseNormX =((float)mouseX)/((float)ofGetWidth());
+   float mouseNormY =((float)mouseY)/((float)ofGetHeight());
    
    if (use_kal){
       shader_keliedo.begin();
       shader_keliedo.setUniform2f("mouse", mousePositionX, mousePositionY);
       shader_keliedo.setUniform1f("time", ofGetElapsedTimef());
       shader_keliedo.setUniform2f("resolution", ofGetWidth(),ofGetHeight());
+      shader_keliedo.setUniform2f("uvOffset", mousePositionX, mousePositionY);
       ofPushMatrix();
       ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
       plane.draw();
@@ -64,7 +73,7 @@ void testApp::draw(){
       shader_keliedo.end();
    }else{
       shader.begin();
-      shader.setUniform2f("mouse", mousePositionX, mousePositionY);
+      shader.setUniform2f("mouse", mouseNormX, mouseNormY);
       ofPushMatrix();
       ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
       plane.draw();
@@ -72,7 +81,7 @@ void testApp::draw(){
       shader.end();
    }
    
-   opal.getTextureReference().unbind();
+   img.getTextureReference().unbind();
 }
 
 
