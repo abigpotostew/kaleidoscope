@@ -47,10 +47,11 @@ void testApp::draw(){
    ofSetColor(255);
    
    GLint repeat = GL_MIRRORED_REPEAT;
-   img.getTextureReference().setTextureWrap(repeat,repeat);
+   //img.getTextureReference().setTextureWrap(repeat,repeat);
+    ofSetTextureWrap(repeat,repeat);
 
    
-   img.getTextureReference().bind();
+   //img.getTextureReference().bind();
    
    float mousePositionX = ofMap(mouseX, 0, ofGetWidth(), plane.getWidth(), -plane.getWidth(), true);
    float mousePositionY = ofMap(mouseY, 0, ofGetHeight(), plane.getHeight(), -plane.getHeight(), true);
@@ -65,8 +66,10 @@ void testApp::draw(){
       shader_keliedo.setUniform2f("resolution", ofGetWidth(),ofGetHeight());
       shader_keliedo.setUniform2f("uvOffset", mouseNormX, mouseNormY);
       ofPushMatrix();
-      ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-      plane.draw();
+      //ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+      //plane.draw();
+       //ofDrawPlane(0, 0, ofGetWidth(), ofGetHeight());
+       img.draw(0,0, ofGetWidth(), ofGetHeight());
       ofPopMatrix();
       shader_keliedo.end();
    }else{
@@ -79,7 +82,7 @@ void testApp::draw(){
       shader.end();
    }
    
-   img.getTextureReference().unbind();
+   //img.getTextureReference().unbind();
 }
 
 
